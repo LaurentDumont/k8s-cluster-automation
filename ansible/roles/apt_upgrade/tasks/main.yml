@@ -1,0 +1,8 @@
+---
+
+- name: Update and APT packages.
+  apt:
+    update_cache: yes
+
+- name: Upgrade the system.
+  command: apt-get upgrade -y -qq

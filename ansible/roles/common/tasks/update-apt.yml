@@ -1,0 +1,5 @@
+---
+
+- name: Update APT for all the following tasks.
+  apt:
+    update_cache: yes

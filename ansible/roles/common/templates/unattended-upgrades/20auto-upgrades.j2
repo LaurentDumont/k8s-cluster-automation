@@ -1,0 +1,4 @@
+// {{ ansible_managed }}
+
+APT::Periodic::Update-Package-Lists "{{ unattended_updt_pkg_list_freq }}";
+APT::Periodic::Unattended-Upgrade "{{ unattended_upgrade_freq }}";

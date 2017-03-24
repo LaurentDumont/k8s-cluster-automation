@@ -1,0 +1,26 @@
+---
+# Variables used in the 'common' role.
+
+# Unattended-upgrades variables
+origins_pattern:
+  - origin=Debian,codename=${distro_codename},label=Debian-Security
+notifications_recipient:
+unattended_updt_pkg_list_freq: 1
+unattended_upgrade_freq: 1
+
+# sSMTP variables
+ssmtp_mailhub:
+ssmtp_mail_account:
+ssmtp_mail_password:
+
+# NTP variables
+enable_ntp_stats: true
+ntp_servers:
+  - 0.debian.pool.ntp.org
+  - 1.debian.pool.ntp.org
+  - 2.debian.pool.ntp.org
+  - 3.debian.pool.ntp.org
+
+# Netdata variables
+slack_webhook: SLACK_WEBHOOK_HERE
+slack_channel: SLACK_CHANNEL_HERE

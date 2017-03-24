@@ -1,0 +1,2 @@
+### IMPORTANT ### SECURITY TOKEN FOR K8-CLUSTER <6 character string>.<16 character string> ### IMPORTANT ###
+k8s_token: thisis.notatokenforreal

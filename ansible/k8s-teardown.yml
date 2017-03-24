@@ -1,0 +1,9 @@
+---
+
+- hosts: k8s-cluster
+  become: yes
+  roles:
+    - k8s-teardown
+  vars_prompt:
+    - name: warning
+      prompt: "WARNING - THIS WILL DESTROY THE KUBERNETES CLUSTER AND REMOVE ALL CONTAINERS - PRESS ENTER TO CONTINUE- WARNING"

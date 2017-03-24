@@ -1,0 +1,32 @@
+---
+- name: Check if the Netdata source have been downloaded.
+  stat:
+    path: /opt/netdata-source
+  register: netdata
+
+- name: Git clone the Netdata repository.
+  git:
+    repo: https://github.com/firehol/netdata.git
+    dest: /opt/netdata-source
+    depth: 1
+  when: netdata.stat.exists == False
+
+- name: Install the Netdata package.
+  command: ./netdata-installer.sh --install /opt
+  args:
+    chdir: /opt/netdata-source/
+  when:  netdata.stat.exists == False
+
+- name: Update Netdata
+  command: /opt/netdata-source/netdata-updater.sh
+  args:
+    chdir: /opt/netdata-source
+
+- name: Add the Netdata config files.
+  template:
+    src: "{{ item }}"
+    dest: /opt/netdata/etc/netdata/
+  with_items:
+    - netdata/netdata.conf
+    - netdata/health_alarm_notify.conf
+  notify: restart netdata

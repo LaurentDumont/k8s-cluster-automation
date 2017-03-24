@@ -1,0 +1,16 @@
+---
+- name: Add the GPG key for the Ubuntu Sysdig repository
+  apt_key:
+    url: https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public
+    state: present
+
+- name: Add the Sysdig repository
+  apt_repository:
+    repo: 'deb http://download.draios.com/stable/deb stable-$(ARCH)/'
+    state: present
+    filename: 'sysdig'
+
+- name: Install the sysdig package
+  package:
+    name: sysdig
+    state: latest

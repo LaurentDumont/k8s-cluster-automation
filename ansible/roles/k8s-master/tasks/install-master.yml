@@ -1,0 +1,50 @@
+- name: Install the Kubernetes components.
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+    - kubernetes-cni
+  when: stat_result.stat.exists == False
+
+- name: Bootstrap the K8s master node.
+  shell: kubeadm init --token={{ k8s_token }}
+  #shell: kubeadm init --token={{ k8s_token }} {{ K8S_API_SERVER_CERT_SAN | default('') }} {{ K8S_SERVICE_CIDR | default('') }} {{ K8S_SERVICE_DNS_DOMAIN | default('') }}
+
+- name: Create the destination folder for the auth users file.
+  file:
+    path: /etc/kubernetes/auth
+    state: directory
+
+- name: Add the template files for Kubernets - API Server and Users file.
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: 'users.csv', dest: '/etc/kubernetes/auth/' }
+
+- name: Add the Users auth to Dashboard server.
+  lineinfile:
+    dest: /etc/kubernetes/manifests/kube-apiserver.json
+    state: present
+    regexp: '"--basic-auth-file=/etc/kubernetes/auth/users.csv",'
+    insertafter: '"--token-auth-file=/etc/kubernetes/pki/tokens.csv",'
+    line: '"--basic-auth-file=/etc/kubernetes/auth/users.csv",'
+
+# Wait for 60 seconds then deploy the Weave network pod.
+- wait_for:
+    timeout: 60
+
+- name: Deploy the Weave Pod Network containers.
+  shell: kubectl apply -f https://git.io/weave-kube
+
+# Wait for 60 seconds then continue with the rest of the setup.
+- wait_for:
+    timeout: 60
+
+- name: TEMPORARY Create a text file to show that the master was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-exists-YES
+    state: touch

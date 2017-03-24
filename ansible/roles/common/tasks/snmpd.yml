@@ -1,0 +1,12 @@
+---
+ - name: Install the snmp binaries.
+   package:
+    name: snmpd
+    state: latest
+
+ - name: Copy template for the SNMPD config file
+   template:
+     src: snmp/snmpd.conf.j2
+     dest: /etc/snmp/snmpd.conf
+   notify:
+     - restart snmpd

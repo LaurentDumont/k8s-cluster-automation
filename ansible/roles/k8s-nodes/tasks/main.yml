@@ -1,0 +1,9 @@
+---
+
+- name: Check if Cluster is up and running.
+  stat:
+    path: /opt/k8s-cluster-exists-YES
+  register: stat_result
+
+- include: join-node.yml
+  when: stat_result.stat.exists == False

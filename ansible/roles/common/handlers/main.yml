@@ -1,0 +1,23 @@
+---
+- name: restart snmpd
+  service:
+    name: snmpd
+    state: restarted
+    enabled: yes
+
+- name: restart ntp
+  service:
+    name: ntp
+    state: restarted
+    enabled: yes
+
+- name: restart netdata
+  service:
+    name: netdata
+    state: restarted
+    enabled: yes
+
+- name: restart iptables-persistent
+  service:
+    name: iptables-persistent
+    state: restarted

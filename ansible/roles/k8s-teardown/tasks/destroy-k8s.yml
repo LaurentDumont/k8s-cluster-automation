@@ -1,0 +1,8 @@
+- name: Reset the K8s cluster with kubeadm.
+  command: kubeadm reset
+
+- name: Remove all containers.
+  shell: docker rm -f $(sudo docker ps -qa)
+
+- name: Remove all images.
+  shell: docker rmi -f $(sudo docker images -qa)

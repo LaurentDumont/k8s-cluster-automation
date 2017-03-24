@@ -1,0 +1,17 @@
+- name: Install the Kubernetes components.
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+    - kubernetes-cni
+
+- name: Join node to K8s cluster.
+  shell: kubeadm join --token {{ k8s_token }} {{ groups['k8s-master'][0] }}
+
+- name: TEMPORARY Create a text file to show that the master was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-exists-YES
+    state: touch

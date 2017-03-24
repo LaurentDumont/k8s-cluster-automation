@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+mailhub={{ ssmtp_mailhub }}
+UseSTARTTLS=Yes
+AuthUser={{ ssmtp_mail_account }}
+AuthPass={{ ssmtp_mail_password }}
+FromLineOverride=YES
+

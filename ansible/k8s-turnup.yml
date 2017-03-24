@@ -1,0 +1,25 @@
+---
+
+- hosts: k8s-master
+  become: yes
+  vars_files:
+    - "vars/k8s-vars.yml"
+  roles:
+    - k8s-master
+
+- hosts: k8s-nodes
+  become: yes
+  vars_files:
+    - "vars/k8s-vars.yml"
+  roles:
+    - k8s-nodes
+
+- hosts: k8s-master
+  become: yes
+  roles:
+    - k8s-heapster
+
+- hosts: k8s-master
+  become: yes
+  roles:
+    - k8s-dashboard

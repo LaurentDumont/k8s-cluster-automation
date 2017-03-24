@@ -1,0 +1,26 @@
+// {{ ansible_managed }}
+
+Unattended-Upgrade::Origins-Pattern {
+{% for pattern in origins_pattern %}
+  "{{ pattern }}";
+{% endfor %}
+};
+
+Unattended-Upgrade::Package-Blacklist {
+
+{% if ansible_fqdn in groups['load-balancer'] %}
+  nginx
+{% endif %}
+
+{% if ansible_fqdn in groups['database'] %}
+  mariadb
+{% endif %}
+
+{% if ansible_fqdn in groups['docker-hosts'] %}
+  docker
+{% endif %}
+
+};
+
+Unattended-Upgrade::Mail "{{ notifications_recipient }}";
+

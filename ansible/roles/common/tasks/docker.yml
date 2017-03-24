@@ -1,0 +1,11 @@
+---
+
+- name: Install Docker
+  package:
+    name: docker.io=1.12.6-0ubuntu1~16.04.1
+
+- name: Start and enable Docker on boot
+  service:
+    name: docker
+    enabled: yes
+    state: started

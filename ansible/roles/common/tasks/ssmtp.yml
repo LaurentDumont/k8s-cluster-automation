@@ -1,0 +1,10 @@
+---
+- name: Install ssmtp
+  package:
+     name: ssmtp
+     state: latest
+
+- name: Configure ssmtp
+  template:
+     src: ssmtp/ssmtp.conf.j2
+     dest: /etc/ssmtp/ssmtp.conf

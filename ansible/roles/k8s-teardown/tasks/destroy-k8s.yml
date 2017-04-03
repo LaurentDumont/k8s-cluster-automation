@@ -3,6 +3,26 @@
 
 - name: Remove all containers.
   shell: docker rm -f $(sudo docker ps -qa)
+  ignore_errors: true
 
 - name: Remove all images.
   shell: docker rmi -f $(sudo docker images -qa)
+  ignore_errors: true
+
+- name: Remove Cluster status file.
+  file:
+    path: /opt/k8s-cluster-exists-YES
+    state: absent
+  when: stat_result.stat.exists == True
+
+- name: Remove Cluster status Dashboard file.
+  file:
+    path: /opt/k8s-cluster-dashboard
+    state: absent
+  when: stat_result.stat.exists == True
+
+- name: Remove Cluster status Heapster file.
+  file:
+    path: /opt/k8s-cluster-heapster
+    state: absent
+  when: stat_result.stat.exists == True

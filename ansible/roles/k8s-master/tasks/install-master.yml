@@ -18,31 +18,41 @@
     path: /etc/kubernetes/auth
     state: directory
 
-- name: Add the template files for Kubernets - API Server and Users file.
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - { src: 'users.csv', dest: '/etc/kubernetes/auth/' }
+#- name: Add the template files for Kubernets - API Server and Users file.
+#  template:
+#    src: "{{ item.src }}"
+#    dest: "{{ item.dest }}"
+#  with_items:
+#    - { src: 'users.csv', dest: '/etc/kubernetes/auth/' }
 
-- name: Add the Users auth to Dashboard server.
-  lineinfile:
-    dest: /etc/kubernetes/manifests/kube-apiserver.json
-    state: present
-    regexp: '"--basic-auth-file=/etc/kubernetes/auth/users.csv",'
-    insertafter: '"--token-auth-file=/etc/kubernetes/pki/tokens.csv",'
-    line: '"--basic-auth-file=/etc/kubernetes/auth/users.csv",'
+#- name: Add the Users auth to Dashboard server.
+#  lineinfile:
+#    dest: /etc/kubernetes/manifests/kube-apiserver.yaml
+#    state: present
+#    regexp: '"- --anonymous-auth=false",'
+#    insertafter: '"- kube-apiserver",'
+#    line: '"- --anonymous-auth=false",'
+#
+#- name: Allow for basic auth for the Dashboard.
+#  lineinfile:
+#    dest: /etc/kubernetes/manifests/kube-apiserver.yaml
+#    state: present
+#    regexp: '"- --basic-auth-file=/etc/kubernetes/auth/users.csv",'
+#    insertafter: '"- kube-apiserver",'
+#    line: '"- --basic-auth-file=/etc/kubernetes/auth/users.csv",'
 
-# Wait for 60 seconds then deploy the Weave network pod.
-- wait_for:
-    timeout: 60
+- name: TEMPORARY Create super permissive RBAC policy for the cluster. TEMPORARY
+  shell: >
+    kubectl create clusterrolebinding permissive-binding \
+    --clusterrole=cluster-admin \
+    --user=admin \
+    --user=kubelet \
+    --group=system:serviceaccounts \
+    --kubeconfig=/etc/kubernetes/admin.conf
+
 
 - name: Deploy the Weave Pod Network containers.
-  shell: kubectl apply -f https://git.io/weave-kube
-
-# Wait for 60 seconds then continue with the rest of the setup.
-- wait_for:
-    timeout: 60
+  shell: kubectl apply -f https://git.io/weave-kube-1.6 --kubeconfig=/etc/kubernetes/admin.conf
 
 - name: TEMPORARY Create a text file to show that the master was successfully created. TEMPORARY
   file:

@@ -18,9 +18,6 @@
   become: yes
   roles:
     - k8s-heapster
-
-- hosts: k8s-master
-  become: yes
-  roles:
     - k8s-dashboard
+    - k8s-ingress
     - post-install-messages

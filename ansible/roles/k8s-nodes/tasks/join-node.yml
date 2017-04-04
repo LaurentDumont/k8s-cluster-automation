@@ -10,8 +10,4 @@
 
 - name: Join node to K8s cluster.
   shell: kubeadm join --token {{ k8s_token }} {{ groups['k8s-master'][0] }}:6443
-
-- name: TEMPORARY Create a text file to show that the master was successfully created. TEMPORARY
-  file:
-    path: /opt/k8s-cluster-exists-YES
-    state: touch
+  creates: /opt/k8s-cluster-exists-YES

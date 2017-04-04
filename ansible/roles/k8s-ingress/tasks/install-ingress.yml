@@ -1,0 +1,5 @@
+---
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  creates: /opt/k8s-cluster-ingress

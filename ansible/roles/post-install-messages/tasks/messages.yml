@@ -1,0 +1,15 @@
+- name: Print cluster information and other useful commands.
+  vars:
+    msg: |
+         Your cluster should be up and running !
+         1) Weave Network Provider
+         2) Dashboard Addon
+         3) Heapster Monitoring Platform - Grafana and InfluxDB
+
+         Useful "kubectl" commands :
+         - kubectl get pods
+         - kubectl get svc
+         - kubectl get deployment
+           You can use "kubectl -n kube-system" to list ressources in the control plane namespace
+  debug:
+    msg: "{{ msg.split('\n') }}"

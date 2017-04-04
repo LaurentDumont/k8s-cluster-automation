@@ -8,6 +8,8 @@ You can use the Makefile to easily use the "ansible-playbook" commands.
 
 | Command | What does it do? |
 | --- | --- |
+|k8s-setup| Setup a system with basic packages but asking for password/ sudo password. |
+|k8s-common| Setup a system with basic packages but with a ssh-key for login. |
 | make k8s-apt | Runs "apt-get update && apt-get upgrade -y -qq" |
-| make k8s-turnup | Bootstrap the cluster using kubeadm |
-|make k8s-teardown| Teardown the cluster and removes all Docker containers|
+| make k8s-turnup | Bootstrap the cluster using kubeadm. |
+|make k8s-teardown| Teardown the cluster and removes all Docker containers. |

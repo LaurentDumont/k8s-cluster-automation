@@ -4,3 +4,8 @@
   command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml --kubeconfig=/etc/kubernetes/admin.conf
   args:
     creates: /opt/k8s-cluster-ingress
+
+- name: TEMPORARY Create a text file to show that the Ingress was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-ingress
+    state: touch

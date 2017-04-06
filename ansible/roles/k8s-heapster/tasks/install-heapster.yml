@@ -10,3 +10,8 @@
   shell: kubectl apply -f /opt/heapster/deploy/kube-config/influxdb/ --kubeconfig=/etc/kubernetes/admin.conf
   args:
     creates: /opt/k8s-cluster-heapster
+
+- name: TEMPORARY Create a text file to show that the Dashboard was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-heapster
+    state: touch

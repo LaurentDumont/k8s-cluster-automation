@@ -7,3 +7,5 @@
 
 - include: install-master.yml
   when: stat_result.stat.exists == False
+
+- include: kubectl-config.yml

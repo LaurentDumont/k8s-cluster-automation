@@ -10,6 +10,8 @@
 
 - name: Bootstrap the K8s master node.
   shell: kubeadm init --token={{ k8s_token }}
+  args:
+    creates: /opt/k8s-cluster-exists-YES
 
 - name: Create the destination folder for the auth users file.
   file:
@@ -52,3 +54,8 @@
   command: kubectl apply -f https://git.io/weave-kube-1.6 --kubeconfig=/etc/kubernetes/admin.conf
   args:
     creates: /opt/k8s-cluster-exists-YES
+
+- name: TEMPORARY Create a text file to show that the Master was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-exists-YES
+    state: touch

@@ -1,0 +1,15 @@
+---
+
+- name: Copy the admin.conf file into the user home
+  copy:
+    src: /etc/kubernetes/admin.conf
+    remote_src: true
+    dest: /home/lanets/
+    owner: "lanets"
+    group: "lanets"
+
+- name: Add the EXPORT statement to the user.
+  lineinfile:
+    dest: /etc/profile
+    regexp: 'export KUBECONFIG=$HOME/admin.conf'
+    line: 'export KUBECONFIG=$HOME/admin.conf'

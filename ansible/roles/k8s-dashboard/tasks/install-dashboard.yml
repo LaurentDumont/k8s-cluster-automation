@@ -4,3 +4,8 @@
   shell: kubectl apply -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml --kubeconfig=/etc/kubernetes/admin.conf
   args:
     creates: /opt/k8s-cluster-dashboard
+
+- name: TEMPORARY Create a text file to show that the Dashboard was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-dashboard
+    state: touch

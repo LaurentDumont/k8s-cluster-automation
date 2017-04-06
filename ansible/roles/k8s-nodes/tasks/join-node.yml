@@ -1,3 +1,5 @@
+---
+
 - name: Install the Kubernetes components.
   package:
     name: "{{ item }}"
@@ -12,3 +14,8 @@
   shell: kubeadm join --token {{ k8s_token }} {{ groups['k8s-master'][0] }}:6443
   args:
     creates: /opt/k8s-cluster-exists-YES
+
+- name: TEMPORARY Create a text file to show that the Ingress was successfully created. TEMPORARY
+  file:
+    path: /opt/k8s-cluster-exists-YES
+    state: touch

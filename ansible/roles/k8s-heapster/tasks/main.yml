@@ -1,4 +1,5 @@
 ---
+
 - name: Check if Cluster is up and running.
   stat:
     path: /opt/k8s-cluster-heapster

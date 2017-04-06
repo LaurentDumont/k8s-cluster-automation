@@ -6,4 +6,4 @@
 
 - name: Add the Kubernetes repository.
   apt_repository:
-    repo: deb http://apt.kubernetes.io/ kubernetes-xenial-unstable main
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main

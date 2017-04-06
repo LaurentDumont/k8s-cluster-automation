@@ -31,5 +31,5 @@
 
 - name: Remove the kubectl admin.conf file.
   file:
-    path: "/home/lanets/admin.conf"
+    path: "/home/{{ ansible_user }}/admin.conf"
     state: absent

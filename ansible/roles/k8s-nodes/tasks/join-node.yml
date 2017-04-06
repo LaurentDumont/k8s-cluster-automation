@@ -10,4 +10,5 @@
 
 - name: Join node to K8s cluster.
   shell: kubeadm join --token {{ k8s_token }} {{ groups['k8s-master'][0] }}:6443
-  creates: /opt/k8s-cluster-exists-YES
+  args:
+    creates: /opt/k8s-cluster-exists-YES

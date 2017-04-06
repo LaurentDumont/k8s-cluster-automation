@@ -2,4 +2,5 @@
 
 - name: Deploy the Dashboard manifests.
   shell: kubectl apply -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml --kubeconfig=/etc/kubernetes/admin.conf
-  creates: /opt/k8s-cluster-dashboard
+  args:
+    creates: /opt/k8s-cluster-dashboard

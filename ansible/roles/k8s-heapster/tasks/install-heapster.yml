@@ -8,4 +8,5 @@
 
 - name: Deploy the Heapster manifests.
   shell: kubectl apply -f /opt/heapster/deploy/kube-config/influxdb/ --kubeconfig=/etc/kubernetes/admin.conf
-  creates: /opt/k8s-cluster-heapster
+  args:
+    creates: /opt/k8s-cluster-heapster

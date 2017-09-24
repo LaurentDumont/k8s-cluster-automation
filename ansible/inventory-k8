@@ -1,12 +1,12 @@
 # GENERIC UBUNTU SERVER FOR COMMON PLAYBOOKS
 [k8s-cluster]
-192.0.2.1 hostname=master.k8s.example.com
-192.0.2.2 hostname=node1.k8s.example.com
+172.16.42.112 hostname=master.k8s.example.com
+172.16.42.113 hostname=node1.k8s.example.com
 
 # THE KUBERNETES MASTER
 [k8s-master]
-192.0.2.1
+172.16.42.112
 
 # THE KUBERNETES NODES
 [k8s-nodes]
-192.0.2.2
+172.16.42.113

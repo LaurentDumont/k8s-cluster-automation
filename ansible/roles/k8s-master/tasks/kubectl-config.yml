@@ -4,7 +4,7 @@
   copy:
     remote_src: true
     src: /etc/kubernetes/admin.conf
-    dest: /home/lanets/
+    dest: /home/sysadmin/
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 

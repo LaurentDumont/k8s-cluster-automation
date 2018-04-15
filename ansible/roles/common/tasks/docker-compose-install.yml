@@ -7,7 +7,7 @@
 
 - name: Download the docker-compose binary.
   get_url:
-    url: https://github.com/docker/compose/releases/download/1.11.1/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+    url: https://github.com/docker/compose/releases/download/1.14.0/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
     dest: /opt/docker-compose-binary/docker-compose
 
 - name: Move the docker-compose binary to the correct location.
@@ -15,4 +15,4 @@
     remote_src: True
     src: /opt/docker-compose-binary/docker-compose
     dest: /usr/local/bin/docker-compose
-    mode: "a=rx"
+    mode: "a=x"

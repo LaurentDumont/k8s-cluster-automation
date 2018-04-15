@@ -1,9 +1,38 @@
 ---
 
+
+
 - name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
-  command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/namespace.yaml --kubeconfig=/etc/kubernetes/admin.conf
   args:
     creates: /opt/k8s-cluster-ingress
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/default-backend.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  args:
+    creates: /opt/k8s-cluster-ingress
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/configmap.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  args:
+    creates: /opt/k8s-cluster-ingress
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/tcp-services-configmap.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  args:
+    creates: /opt/k8s-cluster-ingress
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/udp-services-configmap.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  args:
+    creates: /opt/k8s-cluster-ingress
+
+- name: Download the Ingress Kubeadm manifests files ** Different from non-kubeadm clusters **.
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/baremetal/service-nodeport.yaml --kubeconfig=/etc/kubernetes/admin.conf
+  args:
+    creates: /opt/k8s-cluster-ingress
+
+
 
 - name: TEMPORARY Create a text file to show that the Ingress was successfully created. TEMPORARY
   file:

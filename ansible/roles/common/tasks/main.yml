@@ -4,17 +4,17 @@
 # Install a list of base packages that are useful to any server.
 - include: base-packages.yml
 # Enables and configures the SNMP process for future monitoring.
-- include: snmpd.yml
-# Install the sysdig package from source.
-- include: sysdig.yml
+#- include: snmpd.yml
+## Install the sysdig package from source.
+#- include: sysdig.yml
 # Install the Docker package.
 - include: docker.yml
-# Install and configures the SSMTP package to send emails.
-- include: ssmtp.yml
-# Install and configures
-- include: ntp-client.yml
-# Install the Netdata monitoring package.
-- include: netdata.yml
+## Install and configures the SSMTP package to send emails.
+#- include: ssmtp.yml
+## Install and configures
+#- include: ntp-client.yml
+## Install the Netdata monitoring package.
+#- include: netdata.yml
 # Install the docker-compose package.
 - include: docker-compose-install.yml
 # Install the Google Kubernetes repository

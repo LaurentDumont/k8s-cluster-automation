@@ -11,7 +11,7 @@
     - kubernetes-cni
 
 - name: Join node to K8s cluster.
-  shell: kubeadm join --token {{ k8s_token }} {{ groups['k8s-master'][0] }}:6443
+  shell: kubeadm join --discovery-token-unsafe-skip-ca-verification --token {{ k8s_token }} {{ groups['k8s-master'][0] }}:6443
   args:
     creates: /opt/k8s-cluster-exists-YES
 

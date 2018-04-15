@@ -1,8 +1,22 @@
 ---
 
+- name: Disable swap
+  command: swapoff -a
+
+- name: Add the GPG key for the Debian Docker repository
+  apt_key:
+    url: "https://download.docker.com/linux/debian/gpg"
+    state: present
+
+- name: Add the Docker Debian repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/debian stretch stable'
+    state: present
+    update_cache: yes
+
 - name: Install Docker
   package:
-    name: docker.io=1.12.6-0ubuntu1~16.04.1
+    name: docker-ce=17.03.2~ce-0~debian-stretch
 
 - name: Start and enable Docker on boot
   service:
